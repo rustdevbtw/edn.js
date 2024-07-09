@@ -1,0 +1,79 @@
+{
+  ; Using OpenAI as the provider
+  :provider "openai"
+  
+  ; OpenAI options
+  :openai {
+    ; Set the Base URL (Groq, in this case)
+    :url "https://api.groq.com/openai/v1"
+    ; Set the model (Llama3 70B, in this case)
+    :model "llama3-70b-8192"
+  }
+  
+  ; Ollama options
+  :ollama {
+    ; The Ollama API URL
+    :url "http://localhost:11434"
+    ; Set the Ollama model name
+    :model "mistral"
+  }
+  
+  ; Git options
+  :git {
+    ; Enable Git signing (only for hooks)
+    ; For normal usage, add "-s" to :pass instead
+    :sign true
+    ; Enable hooks
+    ; When enabled, it checks for --as-hook
+    ; And if it specified stores the generated message to .cts/msg
+    ; You can then do, cat ".cts/msg > $1
+    ; You should then clean that message file (it's recommended to add this file to .gitignore)
+    :hooks true
+    ; Additional arguments to pass to Git (only applicable when running outside a hook)
+    ; they would be added as-it-is
+    :pass "-s"
+  }
+  
+  ; Cts options
+  :cts {
+    ; Select from a list of 5 generated messages
+    :list true
+    ; Automatically commit without prompting (can't be used with :list)
+    :force false
+    ; Add gitmoji
+    :gitmoji true
+    ; Types to select from
+    :types [
+      "feat"
+      "fix"
+      "docs"
+      "style"
+      "refactor"
+      "test"
+      "chore"
+    ]
+    ; Show the cost of the request, and confirm that before making the request
+    :fee true
+    ; The commit message template
+    ; {GIT_BRANCH} - the placeholder for the current Git branch
+    ; {COMMIT_MESSAGE} - the placeholder for the generated commit message
+    :template "[{GIT_BRANCH}]: {COMMIT_MESSAGE}"
+    ; Set your preferred language
+    :language "english"
+  }
+
+  ; Gitmoji mapping for each commit type
+  ; Note: older version of Cts came with some pre-defined gitmoji mappings
+  ; But it no longer does, as of v4.0.0
+  ; Example:
+  ; :docs "📝"
+  :gitmoji {
+    :feat "✨"
+    :fix "🚑"
+    :docs "📝"
+    :style "💄"
+    :refactor "♻️"
+    :test "✅"
+    :chore "🔧"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "edn.js",
+  "module": "index.js",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "jsedn": "^0.4.1"
+  },
+  "scripts": {
+    "prepare": "git config core.hookspath '.git_hooks'"
+  }
+}
