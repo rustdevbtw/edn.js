@@ -23,16 +23,17 @@ async function exists(path) {
   }
 }
 
-function formatRecursive(key) {
-  if (typeof key === 'string') {
+function formatRecursive(key, isKey = true) {
+  if (typeof key === 'string' && isKey) {
     return key.replace(":", "");
   } else if (Array.isArray(key)) {
-    return key.map(formatRecursive);
+    return key.map(item => formatRecursive(item, isKey));
   } else if (typeof key === 'object' && key !== null) {
     const newObj = {};
     Object.keys(key).forEach(k => {
-      const formattedKey = formatRecursive(k);
-      newObj[formattedKey] = formatRecursive(key[k]);
+      const formattedKey = formatRecursive(k, true);
+      const formattedValue = formatRecursive(key[k], false); // Pass false for values
+      newObj[formattedKey] = formattedValue;
     });
     return newObj;
   }
