@@ -1,5 +1,6 @@
 {
   "name": "edn.js",
+  "main": "./index.js",
   "module": "index.js",
   "type": "module",
   "devDependencies": {
